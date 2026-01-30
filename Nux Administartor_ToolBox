@@ -1,0 +1,929 @@
+@echo off
+:: Kiem tra quyen Administrator
+net session >nul 2>&1
+if %errorLevel% == 0 (
+    echo Dang chay voi quyen Admin...
+) else (
+    echo Vui long click chuot phai vao file nay va chon "Run as Administrator".
+    pause
+    exit
+)
+
+:: Dev by Do Tat Vinh
+chcp 65001 >nul
+title NuxOS ToolBox by Do Tat Vinh_NuxOS Dev
+color 0B
+
+:menu
+cls
+echo.
+echo    ███╗   ██╗██╗   ██╗██╗  ██╗    ████████╗ ██████╗  ██████╗ ██╗     ██████╗  ██████╗ ██╗  ██╗
+echo    ████╗  ██║██║   ██║╚██╗██╔╝    ╚══██╔══╝██╔═══██╗██╔═══██╗██║     ██╔══██╗██╔═══██╗╚██╗██╔╝
+echo    ██╔██╗ ██║██║   ██║ ╚███╔╝        ██║   ██║   ██║██║   ██║██║     ██████╔╝██║   ██║ ╚███╔╝
+echo    ██║╚██╗██║██║   ██║ ██╔██╗        ██║   ██║   ██║██║   ██║██║     ██╔══██╗██║   ██║ ██╔██╗
+echo    ██║ ╚████║╚██████╔╝██╔╝ ██╗       ██║   ╚██████╔╝╚██████╔╝███████╗██████╔╝╚██████╔╝██╔╝ ██╗
+echo    ╚═╝  ╚═══╝ ╚═════╝ ╚═╝  ╚═╝       ╚═╝    ╚═════╝  ╚═════╝ ╚══════╝╚═════╝  ╚═════╝ ╚═╝  ╚═╝
+echo.
+echo   =============================================================================================
+echo                           The NuxOS Community Project - NUXOS
+echo   =============================================================================================
+echo.
+echo    [1] Kich hoat Windows, Office (Online Activation)
+echo    [2] Cai dat Trinh duyet (Chrome, Edge, Brave...)
+echo    [3] Toi uu hoa (Don dep he thong)
+echo    [4] Tam dung Windows Update (Den nam 3000)
+echo    [5] Cong cu mang (Network Tools)
+echo    [6] Thiet lap nhanh (Quick Settings)
+echo    [7] Thong tin he thong (System Info)
+echo    [8] Sua loi (Fix)
+echo    [9] Kiem tra trang thai ban quyen
+echo    [10] Truy cap trang web NuxOS (NuxOS)
+echo    [11] Ve chung toi (About NuxOS)
+echo    [12] Bao mat va Rieng tu (Privacy ^& Security)
+echo    [13] Toi uu hieu nang (Performance Booster)
+echo    [14] God Mode ^& Shortcuts
+echo    [15] Thoat
+echo.
+echo    The NuxOS Community Project - Better Windows Experience
+echo.
+set "choice="
+set /p choice=Nhap lua chon cua ban (1-15) ^> 
+
+if "%choice%"=="1" goto run
+if "%choice%"=="2" goto browser_menu
+if "%choice%"=="3" goto optimize
+if "%choice%"=="4" goto disable_update
+if "%choice%"=="5" goto network_menu
+if "%choice%"=="6" goto quick_settings
+if "%choice%"=="7" goto sys_info
+if "%choice%"=="8" goto fix_menu
+if "%choice%"=="9" goto check
+if "%choice%"=="10" goto open_web
+if "%choice%"=="11" goto about
+if "%choice%"=="12" goto privacy_menu
+if "%choice%"=="13" goto performance_menu
+if "%choice%"=="14" goto god_mode_menu
+if "%choice%"=="15" exit
+goto menu
+
+:god_mode_menu
+cls
+color 0D
+echo.
+echo   =================== GOD MODE ^& SHORTCUTS ===================
+echo.
+echo    === GOD MODE ===
+echo    [1] Kich hoat God Mode (Tat ca cai dat Windows)
+echo    [2] Kich hoat All Tasks (Super God Mode)
+echo.
+echo    === DESKTOP SHORTCUTS ===
+echo    [3] Tao shortcuts Cong cu Quan tri
+echo        (Device Manager, Disk Management, Services...)
+echo    [4] Tao shortcuts Thu muc He thong
+echo        (Program Files, System32, Drivers...)
+echo    [5] Tao shortcuts Cong cu Mang
+echo        (Network Connections, Adapter Settings...)
+echo.
+echo    === QUICK ACCESS ===
+echo    [6] Pin thu muc quan trong vao Quick Access
+echo    [7] Xoa OneDrive khoi Quick Access
+echo    [8] Reset Quick Access ve mac dinh
+echo.
+echo    === TASKBAR ===
+echo    [9] Pin cong cu quan tri vao Taskbar
+echo    [10] Xoa Search/Cortana khoi Taskbar
+echo.
+echo    [11] TAO TAT CA (Recommended)
+echo    [12] Quay lai Menu chinh
+echo.
+set "god_choice="
+set /p god_choice=Lua chon (1-12) ^> 
+
+if "%god_choice%"=="1" goto activate_god_mode
+if "%god_choice%"=="2" goto activate_all_tasks
+if "%god_choice%"=="3" goto create_admin_shortcuts
+if "%god_choice%"=="4" goto create_system_shortcuts
+if "%god_choice%"=="5" goto create_network_shortcuts
+if "%god_choice%"=="6" goto pin_quick_access
+if "%god_choice%"=="7" goto remove_onedrive_qa
+if "%god_choice%"=="8" goto reset_quick_access
+if "%god_choice%"=="9" goto pin_taskbar
+if "%god_choice%"=="10" goto remove_search_taskbar
+if "%god_choice%"=="11" goto create_all_shortcuts
+if "%god_choice%"=="12" goto menu
+goto god_mode_menu
+
+:activate_god_mode
+cls
+echo [!] Dang kich hoat God Mode...
+mkdir "%UserProfile%\Desktop\GodMode.{ED7BA470-8E54-465E-825C-99712043E01C}" >nul 2>&1
+if exist "%UserProfile%\Desktop\GodMode.{ED7BA470-8E54-465E-825C-99712043E01C}" (
+    echo [OK] Da tao God Mode tren Desktop!
+    echo [!] Mo folder "GodMode" de truy cap TAT CA cai dat Windows!
+) else (
+    echo [ERROR] Khong the tao God Mode!
+)
+pause
+goto god_mode_menu
+
+:activate_all_tasks
+cls
+echo [!] Dang tao All Tasks (Super God Mode - 200+ tasks)...
+mkdir "%UserProfile%\Desktop\All Tasks.{3E3F6D17-2C14-4F44-8491-DA5AABA1BE16}" >nul 2>&1
+if exist "%UserProfile%\Desktop\All Tasks.{3E3F6D17-2C14-4F44-8491-DA5AABA1BE16}" (
+    echo [OK] Da tao All Tasks tren Desktop!
+    echo [!] Day la SUPER God Mode voi hon 200 tasks!
+) else (
+    echo [ERROR] Khong the tao All Tasks!
+)
+pause
+goto god_mode_menu
+
+:create_admin_shortcuts
+cls
+echo [!] Dang tao Admin Shortcuts tren Desktop...
+echo.
+
+echo [1/8] Device Manager...
+powershell -Command "$WshShell = New-Object -comObject WScript.Shell; $Shortcut = $WshShell.CreateShortcut('%UserProfile%\Desktop\Device Manager.lnk'); $Shortcut.TargetPath = 'devmgmt.msc'; $Shortcut.Save()"
+
+echo [2/8] Disk Management...
+powershell -Command "$WshShell = New-Object -comObject WScript.Shell; $Shortcut = $WshShell.CreateShortcut('%UserProfile%\Desktop\Disk Management.lnk'); $Shortcut.TargetPath = 'diskmgmt.msc'; $Shortcut.Save()"
+
+echo [3/8] Services...
+powershell -Command "$WshShell = New-Object -comObject WScript.Shell; $Shortcut = $WshShell.CreateShortcut('%UserProfile%\Desktop\Services.lnk'); $Shortcut.TargetPath = 'services.msc'; $Shortcut.Save()"
+
+echo [4/8] Task Scheduler...
+powershell -Command "$WshShell = New-Object -comObject WScript.Shell; $Shortcut = $WshShell.CreateShortcut('%UserProfile%\Desktop\Task Scheduler.lnk'); $Shortcut.TargetPath = 'taskschd.msc'; $Shortcut.Save()"
+
+echo [5/8] Event Viewer...
+powershell -Command "$WshShell = New-Object -comObject WScript.Shell; $Shortcut = $WshShell.CreateShortcut('%UserProfile%\Desktop\Event Viewer.lnk'); $Shortcut.TargetPath = 'eventvwr.msc'; $Shortcut.Save()"
+
+echo [6/8] Registry Editor...
+powershell -Command "$WshShell = New-Object -comObject WScript.Shell; $Shortcut = $WshShell.CreateShortcut('%UserProfile%\Desktop\Registry Editor.lnk'); $Shortcut.TargetPath = 'regedit.exe'; $Shortcut.Save()"
+
+echo [7/8] System Configuration...
+powershell -Command "$WshShell = New-Object -comObject WScript.Shell; $Shortcut = $WshShell.CreateShortcut('%UserProfile%\Desktop\System Configuration.lnk'); $Shortcut.TargetPath = 'msconfig.exe'; $Shortcut.Save()"
+
+echo [8/8] Control Panel...
+powershell -Command "$WshShell = New-Object -comObject WScript.Shell; $Shortcut = $WshShell.CreateShortcut('%UserProfile%\Desktop\Control Panel.lnk'); $Shortcut.TargetPath = 'control.exe'; $Shortcut.Save()"
+
+echo.
+echo [OK] Da tao 8 Admin Shortcuts tren Desktop!
+pause
+goto god_mode_menu
+
+:create_system_shortcuts
+cls
+echo [!] Dang tao System Folder Shortcuts...
+echo.
+
+echo [1/5] Program Files...
+powershell -Command "$WshShell = New-Object -comObject WScript.Shell; $Shortcut = $WshShell.CreateShortcut('%UserProfile%\Desktop\Program Files.lnk'); $Shortcut.TargetPath = 'C:\Program Files'; $Shortcut.Save()"
+
+echo [2/5] System32...
+powershell -Command "$WshShell = New-Object -comObject WScript.Shell; $Shortcut = $WshShell.CreateShortcut('%UserProfile%\Desktop\System32.lnk'); $Shortcut.TargetPath = 'C:\Windows\System32'; $Shortcut.Save()"
+
+echo [3/5] Windows Folder...
+powershell -Command "$WshShell = New-Object -comObject WScript.Shell; $Shortcut = $WshShell.CreateShortcut('%UserProfile%\Desktop\Windows.lnk'); $Shortcut.TargetPath = 'C:\Windows'; $Shortcut.Save()"
+
+echo [4/5] Startup Folder...
+powershell -Command "$WshShell = New-Object -comObject WScript.Shell; $Shortcut = $WshShell.CreateShortcut('%UserProfile%\Desktop\Startup Folder.lnk'); $Shortcut.TargetPath = '%AppData%\Microsoft\Windows\Start Menu\Programs\Startup'; $Shortcut.Save()"
+
+echo [5/5] Drivers Folder...
+powershell -Command "$WshShell = New-Object -comObject WScript.Shell; $Shortcut = $WshShell.CreateShortcut('%UserProfile%\Desktop\Drivers.lnk'); $Shortcut.TargetPath = 'C:\Windows\System32\drivers'; $Shortcut.Save()"
+
+echo.
+echo [OK] Da tao 5 System Shortcuts!
+pause
+goto god_mode_menu
+
+:create_network_shortcuts
+cls
+echo [!] Dang tao Network Shortcuts...
+echo.
+
+echo [1/3] Network Connections...
+powershell -Command "$WshShell = New-Object -comObject WScript.Shell; $Shortcut = $WshShell.CreateShortcut('%UserProfile%\Desktop\Network Connections.lnk'); $Shortcut.TargetPath = 'ncpa.cpl'; $Shortcut.Save()"
+
+echo [2/3] Network and Sharing Center...
+powershell -Command "$WshShell = New-Object -comObject WScript.Shell; $Shortcut = $WshShell.CreateShortcut('%UserProfile%\Desktop\Network Center.lnk'); $Shortcut.TargetPath = 'control.exe /name Microsoft.NetworkAndSharingCenter'; $Shortcut.Save()"
+
+echo [3/3] Firewall Settings...
+powershell -Command "$WshShell = New-Object -comObject WScript.Shell; $Shortcut = $WshShell.CreateShortcut('%UserProfile%\Desktop\Firewall.lnk'); $Shortcut.TargetPath = 'firewall.cpl'; $Shortcut.Save()"
+
+echo.
+echo [OK] Da tao 3 Network Shortcuts!
+pause
+goto god_mode_menu
+
+:pin_quick_access
+cls
+echo [!] Dang pin thu muc quan trong vao Quick Access...
+echo.
+
+echo [1/4] Downloads...
+powershell -Command "$o = new-object -com shell.application; $o.Namespace('%UserProfile%\Downloads').Self.InvokeVerb('pintohome')"
+
+echo [2/4] Desktop...
+powershell -Command "$o = new-object -com shell.application; $o.Namespace('%UserProfile%\Desktop').Self.InvokeVerb('pintohome')"
+
+echo [3/4] Documents...
+powershell -Command "$o = new-object -com shell.application; $o.Namespace('%UserProfile%\Documents').Self.InvokeVerb('pintohome')"
+
+echo [4/4] Pictures...
+powershell -Command "$o = new-object -com shell.application; $o.Namespace('%UserProfile%\Pictures').Self.InvokeVerb('pintohome')"
+
+echo.
+echo [OK] Da pin cac thu muc vao Quick Access!
+pause
+goto god_mode_menu
+
+:remove_onedrive_qa
+cls
+echo [!] Dang xoa OneDrive khoi Quick Access...
+reg delete "HKEY_CLASSES_ROOT\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" /v "System.IsPinnedToNameSpaceTree" /f >nul 2>&1
+reg delete "HKEY_CLASSES_ROOT\Wow6432Node\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" /v "System.IsPinnedToNameSpaceTree" /f >nul 2>&1
+echo [OK] Da xoa OneDrive khoi Quick Access!
+echo [!] Mo lai File Explorer de thay thay doi.
+pause
+goto god_mode_menu
+
+:reset_quick_access
+cls
+echo [!] Dang reset Quick Access...
+del /f /q "%AppData%\Microsoft\Windows\Recent\AutomaticDestinations\*" >nul 2>&1
+echo [OK] Da reset Quick Access!
+pause
+goto god_mode_menu
+
+:pin_taskbar
+cls
+echo [!] Dang tao shortcuts cho Taskbar...
+echo.
+echo [!] Luu y: Ban can tu TAY pin cac shortcut vao Taskbar
+echo     Bang cach: Chuot phai vao file .lnk -> Pin to taskbar
+echo.
+echo Dang tao shortcuts...
+
+powershell -Command "$WshShell = New-Object -comObject WScript.Shell; $Shortcut = $WshShell.CreateShortcut('%UserProfile%\Desktop\CMD Admin.lnk'); $Shortcut.TargetPath = 'cmd.exe'; $Shortcut.Arguments = '/k cd /d C:\'; $Shortcut.Save()"
+
+powershell -Command "$WshShell = New-Object -comObject WScript.Shell; $Shortcut = $WshShell.CreateShortcut('%UserProfile%\Desktop\PowerShell Admin.lnk'); $Shortcut.TargetPath = 'powershell.exe'; $Shortcut.Arguments = '-NoExit -Command cd C:\'; $Shortcut.Save()"
+
+powershell -Command "$WshShell = New-Object -comObject WScript.Shell; $Shortcut = $WshShell.CreateShortcut('%UserProfile%\Desktop\Task Manager.lnk'); $Shortcut.TargetPath = 'taskmgr.exe'; $Shortcut.Save()"
+
+echo.
+echo [OK] Da tao 3 shortcuts tren Desktop!
+echo [!] Hay chuot phai -> "Pin to taskbar" de pin chung.
+pause
+goto god_mode_menu
+
+:remove_search_taskbar
+cls
+echo [!] Dang an Search Box/Cortana tren Taskbar...
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Search" /v "SearchboxTaskbarMode" /t REG_DWORD /d 0 /f >nul
+echo [OK] Da an Search Box tren Taskbar!
+echo [!] Taskbar se rong hon!
+pause
+goto god_mode_menu
+
+:create_all_shortcuts
+cls
+color 0C
+echo.
+echo   ===============================================================
+echo               TAO TAT CA SHORTCUTS ^& GOD MODE
+echo   ===============================================================
+echo.
+set /p confirm_all=Ban co chac chan? (Y/N) ^> 
+if /i "%confirm_all%" neq "Y" goto god_mode_menu
+
+echo.
+echo [!] Dang tao tat ca shortcuts...
+echo.
+
+echo [1/5] God Mode...
+mkdir "%UserProfile%\Desktop\GodMode.{ED7BA470-8E54-465E-825C-99712043E01C}" >nul 2>&1
+
+echo [2/5] Admin Shortcuts...
+powershell -Command "$WshShell = New-Object -comObject WScript.Shell; $Shortcut = $WshShell.CreateShortcut('%UserProfile%\Desktop\Device Manager.lnk'); $Shortcut.TargetPath = 'devmgmt.msc'; $Shortcut.Save()" >nul 2>&1
+powershell -Command "$WshShell = New-Object -comObject WScript.Shell; $Shortcut = $WshShell.CreateShortcut('%UserProfile%\Desktop\Disk Management.lnk'); $Shortcut.TargetPath = 'diskmgmt.msc'; $Shortcut.Save()" >nul 2>&1
+powershell -Command "$WshShell = New-Object -comObject WScript.Shell; $Shortcut = $WshShell.CreateShortcut('%UserProfile%\Desktop\Services.lnk'); $Shortcut.TargetPath = 'services.msc'; $Shortcut.Save()" >nul 2>&1
+powershell -Command "$WshShell = New-Object -comObject WScript.Shell; $Shortcut = $WshShell.CreateShortcut('%UserProfile%\Desktop\Task Scheduler.lnk'); $Shortcut.TargetPath = 'taskschd.msc'; $Shortcut.Save()" >nul 2>&1
+powershell -Command "$WshShell = New-Object -comObject WScript.Shell; $Shortcut = $WshShell.CreateShortcut('%UserProfile%\Desktop\Registry Editor.lnk'); $Shortcut.TargetPath = 'regedit.exe'; $Shortcut.Save()" >nul 2>&1
+
+echo [3/5] System Shortcuts...
+powershell -Command "$WshShell = New-Object -comObject WScript.Shell; $Shortcut = $WshShell.CreateShortcut('%UserProfile%\Desktop\Program Files.lnk'); $Shortcut.TargetPath = 'C:\Program Files'; $Shortcut.Save()" >nul 2>&1
+powershell -Command "$WshShell = New-Object -comObject WScript.Shell; $Shortcut = $WshShell.CreateShortcut('%UserProfile%\Desktop\Startup Folder.lnk'); $Shortcut.TargetPath = '%AppData%\Microsoft\Windows\Start Menu\Programs\Startup'; $Shortcut.Save()" >nul 2>&1
+
+echo [4/5] Network Shortcuts...
+powershell -Command "$WshShell = New-Object -comObject WScript.Shell; $Shortcut = $WshShell.CreateShortcut('%UserProfile%\Desktop\Network Connections.lnk'); $Shortcut.TargetPath = 'ncpa.cpl'; $Shortcut.Save()" >nul 2>&1
+
+echo [5/5] Quick Access...
+powershell -Command "$o = new-object -com shell.application; $o.Namespace('%UserProfile%\Downloads').Self.InvokeVerb('pintohome')" >nul 2>&1
+powershell -Command "$o = new-object -com shell.application; $o.Namespace('%UserProfile%\Desktop').Self.InvokeVerb('pintohome')" >nul 2>&1
+
+echo.
+color 0A
+echo   ===============================================================
+echo    [OK] HOAN TAT! Da tao tat ca shortcuts va God Mode!
+echo   ===============================================================
+echo.
+echo    Kiem tra Desktop de thay cac shortcuts moi!
+echo.
+pause
+goto god_mode_menu
+
+:performance_menu
+cls
+color 0E
+echo.
+echo   ========================= PERFORMANCE BOOSTER =========================
+echo.
+echo    === VISUAL EFFECTS ===
+echo    [1] Tat Visual Effects (Tiet kiem RAM)
+echo    [2] Bat lai Visual Effects (Mac dinh)
+echo.
+echo    === SYSTEM OPTIMIZATION ===
+echo    [3] Clear Standby Memory (Giai phong RAM)
+echo    [4] Tat Superfetch/Prefetch
+echo    [5] Bat lai Superfetch/Prefetch
+echo    [6] Tat Windows Search Indexing
+echo    [7] Bat lai Windows Search Indexing
+echo.
+echo    === POWER SETTINGS ===
+echo    [8] Set High Performance Power Plan
+echo    [9] Set Balanced Power Plan
+echo    [10] Ultimate Performance (Windows 10/11 Pro)
+echo.
+echo    === ADVANCED TWEAKS ===
+echo    [11] Optimize Processor Scheduling (For Gaming)
+echo    [12] Disable HPET (Tang FPS)
+echo    [13] Optimize Paging File
+echo    [14] Tat Transparency Effects
+echo.
+echo    === ALL-IN-ONE ===
+echo    [15] PERFORMANCE BOOST FULL (Tat tat ca)
+echo    [16] Khoi phuc Mac dinh (Restore Defaults)
+echo.
+echo    [17] Quay lai Menu chinh
+echo.
+set "perf_choice="
+set /p perf_choice=Lua chon (1-17) ^> 
+
+if "%perf_choice%"=="1" goto disable_visual_effects
+if "%perf_choice%"=="2" goto enable_visual_effects
+if "%perf_choice%"=="3" goto clear_standby_memory
+if "%perf_choice%"=="4" goto disable_superfetch
+if "%perf_choice%"=="5" goto enable_superfetch
+if "%perf_choice%"=="6" goto disable_search_indexing
+if "%perf_choice%"=="7" goto enable_search_indexing
+if "%perf_choice%"=="8" goto set_high_performance
+if "%perf_choice%"=="9" goto set_balanced
+if "%perf_choice%"=="10" goto set_ultimate_performance
+if "%perf_choice%"=="11" goto optimize_processor
+if "%perf_choice%"=="12" goto disable_hpet
+if "%perf_choice%"=="13" goto optimize_paging
+if "%perf_choice%"=="14" goto disable_transparency
+if "%perf_choice%"=="15" goto full_performance_boost
+if "%perf_choice%"=="16" goto restore_defaults
+if "%perf_choice%"=="17" goto menu
+goto performance_menu
+
+:disable_visual_effects
+cls
+echo [!] Dang tat Visual Effects...
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects" /v "VisualFXSetting" /t REG_DWORD /d 2 /f >nul
+reg add "HKCU\Control Panel\Desktop" /v "UserPreferencesMask" /t REG_BINARY /d 9012038010000000 /f >nul
+reg add "HKCU\Control Panel\Desktop\WindowMetrics" /v "MinAnimate" /t REG_SZ /d 0 /f >nul
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "ListviewAlphaSelect" /t REG_DWORD /d 0 /f >nul
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "TaskbarAnimations" /t REG_DWORD /d 0 /f >nul
+reg add "HKCU\Software\Microsoft\Windows\DWM" /v "EnableAeroPeek" /t REG_DWORD /d 0 /f >nul
+echo [OK] Da tat Visual Effects! (Can dang xuat/khoi dong lai)
+pause
+goto performance_menu
+
+:enable_visual_effects
+cls
+echo [!] Dang bat lai Visual Effects...
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects" /v "VisualFXSetting" /t REG_DWORD /d 1 /f >nul
+reg delete "HKCU\Control Panel\Desktop" /v "UserPreferencesMask" /f >nul 2>&1
+reg add "HKCU\Control Panel\Desktop\WindowMetrics" /v "MinAnimate" /t REG_SZ /d 1 /f >nul
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "ListviewAlphaSelect" /t REG_DWORD /d 1 /f >nul
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "TaskbarAnimations" /t REG_DWORD /d 1 /f >nul
+reg add "HKCU\Software\Microsoft\Windows\DWM" /v "EnableAeroPeek" /t REG_DWORD /d 1 /f >nul
+echo [OK] Da bat lai Visual Effects!
+pause
+goto performance_menu
+
+:clear_standby_memory
+cls
+echo [!] Dang clear Standby Memory...
+powershell -Command "Clear-EventLog -LogName Application,System,Security -ErrorAction SilentlyContinue"
+echo [!] Giai phong RAM cache...
+powershell -Command "$memory = Get-WmiObject Win32_OperatingSystem; Write-Host 'RAM truoc khi clear:' $memory.FreePhysicalMemory KB"
+powershell -Command "[System.GC]::Collect()"
+timeout /t 2 /nobreak >nul
+powershell -Command "$memory = Get-WmiObject Win32_OperatingSystem; Write-Host 'RAM sau khi clear:' $memory.FreePhysicalMemory KB"
+echo [OK] Da clear Standby Memory!
+pause
+goto performance_menu
+
+:disable_superfetch
+cls
+echo [!] Dang tat Superfetch/Prefetch...
+sc stop "SysMain" >nul 2>&1
+sc config "SysMain" start=disabled >nul 2>&1
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters" /v "EnableSuperfetch" /t REG_DWORD /d 0 /f >nul
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters" /v "EnablePrefetcher" /t REG_DWORD /d 0 /f >nul
+echo [OK] Da tat Superfetch/Prefetch! (Tang toc SSD)
+pause
+goto performance_menu
+
+:enable_superfetch
+cls
+echo [!] Dang bat lai Superfetch...
+sc config "SysMain" start=auto >nul 2>&1
+sc start "SysMain" >nul 2>&1
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters" /v "EnableSuperfetch" /t REG_DWORD /d 3 /f >nul
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters" /v "EnablePrefetcher" /t REG_DWORD /d 3 /f >nul
+echo [OK] Da bat lai Superfetch!
+pause
+goto performance_menu
+
+:disable_search_indexing
+cls
+echo [!] Dang tat Windows Search Indexing...
+sc stop "WSearch" >nul 2>&1
+sc config "WSearch" start=disabled >nul 2>&1
+echo [OK] Da tat Search Indexing! (Tiet kiem CPU/Disk)
+echo [!] Luu y: Tim kiem file se cham hon.
+pause
+goto performance_menu
+
+:enable_search_indexing
+cls
+echo [!] Dang bat lai Windows Search...
+sc config "WSearch" start=auto >nul 2>&1
+sc start "WSearch" >nul 2>&1
+echo [OK] Da bat lai Search Indexing!
+pause
+goto performance_menu
+
+:set_high_performance
+cls
+echo [!] Dang chuyen sang High Performance mode...
+powercfg /setactive 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c
+echo [OK] Da bat High Performance Power Plan!
+pause
+goto performance_menu
+
+:set_balanced
+cls
+echo [!] Dang chuyen sang Balanced mode...
+powercfg /setactive 381b4222-f694-41f0-9685-ff5bb260df2e
+echo [OK] Da bat Balanced Power Plan!
+pause
+goto performance_menu
+
+:set_ultimate_performance
+cls
+echo [!] Dang kich hoat Ultimate Performance mode...
+powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61 >nul 2>&1
+powercfg /setactive e9a42b02-d5df-448d-aa00-03f14749eb61 >nul 2>&1
+if %errorLevel% equ 0 (
+    echo [OK] Da bat Ultimate Performance! (Chi co tren Win 10/11 Pro+)
+) else (
+    echo [!] Loi: Windows version cua ban khong ho tro Ultimate Performance.
+    echo [!] Dang chuyen sang High Performance thay the...
+    powercfg /setactive 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c
+)
+pause
+goto performance_menu
+
+:optimize_processor
+cls
+echo [!] Dang toi uu Processor Scheduling cho Gaming...
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\PriorityControl" /v "Win32PrioritySeparation" /t REG_DWORD /d 38 /f >nul
+echo [OK] Da toi uu Processor Scheduling!
+echo [!] Can khoi dong lai de hieu luc.
+pause
+goto performance_menu
+
+:disable_hpet
+cls
+echo [!] Dang disable HPET (High Precision Event Timer)...
+bcdedit /deletevalue useplatformclock >nul 2>&1
+echo [OK] Da disable HPET! (Co the tang FPS trong game)
+echo [!] QUAN TRONG: Can KHOI DONG LAI may!
+pause
+goto performance_menu
+
+:optimize_paging
+cls
+echo [!] Dang toi uu Paging File...
+echo.
+echo [?] Ban muon:
+echo     [1] Tu dong quan ly (Windows tu chon)
+echo     [2] Custom size (Khuyên dùng: 1.5x RAM)
+echo     [3] No paging file (Khong khuyen nghi)
+echo.
+set /p paging_choice=Lua chon ^> 
+
+if "%paging_choice%"=="1" (
+    wmic computersystem set AutomaticManaged
+
+:privacy_menu
+cls
+echo.
+echo   ========================= PRIVACY ^& SECURITY =========================
+echo.
+echo    [1] Tat Windows Telemetry (Thu thap du lieu)
+echo    [2] Tat Cortana
+echo    [3] Tat Windows Defender (KHONG khuyen nghi!)
+echo    [4] Bat lai Windows Defender
+echo    [5] Xoa Activity History
+echo    [6] Tat Location Tracking
+echo    [7] Tat Advertising ID
+echo    [8] Block Telemetry bang Hosts file
+echo    [9] Tat Windows Spotlight (Lock Screen Ads)
+echo    [10] TAT TAT CA (Full Privacy Mode)
+echo    [11] Quay lai Menu chinh
+echo.
+set "p_choice="
+set /p p_choice=Lua chon (1-11) ^> 
+
+if "%p_choice%"=="1" goto disable_telemetry
+if "%p_choice%"=="2" goto disable_cortana
+if "%p_choice%"=="3" goto disable_defender
+if "%p_choice%"=="4" goto enable_defender
+if "%p_choice%"=="5" goto clear_activity
+if "%p_choice%"=="6" goto disable_location
+if "%p_choice%"=="7" goto disable_adid
+if "%p_choice%"=="8" goto block_telemetry_hosts
+if "%p_choice%"=="9" goto disable_spotlight
+if "%p_choice%"=="10" goto full_privacy
+if "%p_choice%"=="11" goto menu
+goto privacy_menu
+
+:disable_telemetry
+cls
+echo [!] Dang tat Telemetry...
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\DataCollection" /v "AllowTelemetry" /t REG_DWORD /d 0 /f >nul
+reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection" /v "AllowTelemetry" /t REG_DWORD /d 0 /f >nul
+sc config DiagTrack start= disabled >nul 2>&1
+sc stop DiagTrack >nul 2>&1
+sc config dmwappushservice start= disabled >nul 2>&1
+sc stop dmwappushservice >nul 2>&1
+echo [OK] Da tat Telemetry thanh cong!
+pause
+goto privacy_menu
+
+:disable_cortana
+cls
+echo [!] Dang tat Cortana...
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v "AllowCortana" /t REG_DWORD /d 0 /f >nul
+reg add "HKLM\SOFTWARE\Microsoft\PolicyManager\default\Experience\AllowCortana" /v "value" /t REG_DWORD /d 0 /f >nul
+taskkill /f /im SearchUI.exe >nul 2>&1
+echo [OK] Da tat Cortana! (Can khoi dong lai de hieu luc)
+pause
+goto privacy_menu
+
+:disable_defender
+cls
+echo.
+echo   ===============================================================
+echo    CANH BAO: Tat Windows Defender se lam may tinh de bi tan cong!
+echo    Chi nen tat neu ban co antivirus khac (Kaspersky, Bitdefender...)
+echo   ===============================================================
+echo.
+set /p confirm=Ban co chac chan muon tat Defender? (Y/N) ^> 
+if /i "%confirm%" neq "Y" goto privacy_menu
+
+echo [!] Dang tat Windows Defender...
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender" /v "DisableAntiSpyware" /t REG_DWORD /d 1 /f >nul
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection" /v "DisableRealtimeMonitoring" /t REG_DWORD /d 1 /f >nul
+powershell -Command "Set-MpPreference -DisableRealtimeMonitoring $true" >nul 2>&1
+echo [OK] Da tat Windows Defender! (Can khoi dong lai)
+pause
+goto privacy_menu
+
+:enable_defender
+cls
+echo [!] Dang bat lai Windows Defender...
+reg delete "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender" /v "DisableAntiSpyware" /f >nul 2>&1
+reg delete "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection" /v "DisableRealtimeMonitoring" /f >nul 2>&1
+powershell -Command "Set-MpPreference -DisableRealtimeMonitoring $false" >nul 2>&1
+echo [OK] Da bat lai Windows Defender!
+pause
+goto privacy_menu
+
+:clear_activity
+cls
+echo [!] Dang xoa Activity History...
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\System" /v "PublishUserActivities" /t REG_DWORD /d 0 /f >nul
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\System" /v "UploadUserActivities" /t REG_DWORD /d 0 /f >nul
+powershell -Command "Remove-Item -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\ActivityHistory\*' -Recurse -Force" >nul 2>&1
+echo [OK] Da xoa Activity History!
+pause
+goto privacy_menu
+
+:disable_location
+cls
+echo [!] Dang tat Location Tracking...
+reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\location" /v "Value" /t REG_SZ /d "Deny" /f >nul
+reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Sensor\Overrides\{BFA794E4-F964-4FDB-90F6-51056BFE4B44}" /v "SensorPermissionState" /t REG_DWORD /d 0 /f >nul
+reg add "HKLM\SYSTEM\CurrentControlSet\Services\lfsvc\Service\Configuration" /v "Status" /t REG_DWORD /d 0 /f >nul
+echo [OK] Da tat Location Tracking!
+pause
+goto privacy_menu
+
+:disable_adid
+cls
+echo [!] Dang tat Advertising ID...
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\AdvertisingInfo" /v "Enabled" /t REG_DWORD /d 0 /f >nul
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\AdvertisingInfo" /v "DisabledByGroupPolicy" /t REG_DWORD /d 1 /f >nul
+echo [OK] Da tat Advertising ID!
+pause
+goto privacy_menu
+
+:block_telemetry_hosts
+cls
+echo [!] Dang block telemetry domains...
+echo 0.0.0.0 vortex.data.microsoft.com >> C:\Windows\System32\drivers\etc\hosts
+echo 0.0.0.0 vortex-win.data.microsoft.com >> C:\Windows\System32\drivers\etc\hosts
+echo 0.0.0.0 telecommand.telemetry.microsoft.com >> C:\Windows\System32\drivers\etc\hosts
+echo 0.0.0.0 telecommand.telemetry.microsoft.com.nsatc.net >> C:\Windows\System32\drivers\etc\hosts
+echo 0.0.0.0 oca.telemetry.microsoft.com >> C:\Windows\System32\drivers\etc\hosts
+echo 0.0.0.0 sqm.telemetry.microsoft.com >> C:\Windows\System32\drivers\etc\hosts
+echo 0.0.0.0 watson.telemetry.microsoft.com >> C:\Windows\System32\drivers\etc\hosts
+echo 0.0.0.0 redir.metaservices.microsoft.com >> C:\Windows\System32\drivers\etc\hosts
+echo 0.0.0.0 choice.microsoft.com >> C:\Windows\System32\drivers\etc\hosts
+echo 0.0.0.0 df.telemetry.microsoft.com >> C:\Windows\System32\drivers\etc\hosts
+echo 0.0.0.0 reports.wes.df.telemetry.microsoft.com >> C:\Windows\System32\drivers\etc\hosts
+echo 0.0.0.0 wes.df.telemetry.microsoft.com >> C:\Windows\System32\drivers\etc\hosts
+echo 0.0.0.0 services.wes.df.telemetry.microsoft.com >> C:\Windows\System32\drivers\etc\hosts
+echo 0.0.0.0 sqm.df.telemetry.microsoft.com >> C:\Windows\System32\drivers\etc\hosts
+echo 0.0.0.0 telemetry.microsoft.com >> C:\Windows\System32\drivers\etc\hosts
+echo 0.0.0.0 watson.ppe.telemetry.microsoft.com >> C:\Windows\System32\drivers\etc\hosts
+echo 0.0.0.0 telemetry.appex.bing.net >> C:\Windows\System32\drivers\etc\hosts
+echo 0.0.0.0 telemetry.urs.microsoft.com >> C:\Windows\System32\drivers\etc\hosts
+echo 0.0.0.0 telemetry.appex.bing.net:443 >> C:\Windows\System32\drivers\etc\hosts
+echo 0.0.0.0 settings-sandbox.data.microsoft.com >> C:\Windows\System32\drivers\etc\hosts
+echo 0.0.0.0 vortex-sandbox.data.microsoft.com >> C:\Windows\System32\drivers\etc\hosts
+echo 0.0.0.0 survey.watson.microsoft.com >> C:\Windows\System32\drivers\etc\hosts
+echo 0.0.0.0 watson.live.com >> C:\Windows\System32\drivers\etc\hosts
+echo 0.0.0.0 watson.microsoft.com >> C:\Windows\System32\drivers\etc\hosts
+echo 0.0.0.0 statsfe2.ws.microsoft.com >> C:\Windows\System32\drivers\etc\hosts
+echo 0.0.0.0 corpext.msitadfs.glbdns2.microsoft.com >> C:\Windows\System32\drivers\etc\hosts
+echo 0.0.0.0 compatexchange.cloudapp.net >> C:\Windows\System32\drivers\etc\hosts
+echo 0.0.0.0 cs1.wpc.v0cdn.net >> C:\Windows\System32\drivers\etc\hosts
+echo 0.0.0.0 a-0001.a-msedge.net >> C:\Windows\System32\drivers\etc\hosts
+echo 0.0.0.0 statsfe2.update.microsoft.com.akadns.net >> C:\Windows\System32\drivers\etc\hosts
+echo 0.0.0.0 sls.update.microsoft.com.akadns.net >> C:\Windows\System32\drivers\etc\hosts
+echo 0.0.0.0 fe2.update.microsoft.com.akadns.net >> C:\Windows\System32\drivers\etc\hosts
+echo 0.0.0.0 diagnostics.support.microsoft.com >> C:\Windows\System32\drivers\etc\hosts
+echo 0.0.0.0 corp.sts.microsoft.com >> C:\Windows\System32\drivers\etc\hosts
+echo 0.0.0.0 statsfe1.ws.microsoft.com >> C:\Windows\System32\drivers\etc\hosts
+echo 0.0.0.0 pre.footprintpredict.com >> C:\Windows\System32\drivers\etc\hosts
+echo 0.0.0.0 i1.services.social.microsoft.com >> C:\Windows\System32\drivers\etc\hosts
+echo 0.0.0.0 i1.services.social.microsoft.com.nsatc.net >> C:\Windows\System32\drivers\etc\hosts
+ipconfig /flushdns >nul
+echo [OK] Da block telemetry domains qua Hosts file!
+pause
+goto privacy_menu
+
+:disable_spotlight
+cls
+echo [!] Dang tat Windows Spotlight...
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "RotatingLockScreenEnabled" /t REG_DWORD /d 0 /f >nul
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "RotatingLockScreenOverlayEnabled" /t REG_DWORD /d 0 /f >nul
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-338387Enabled" /t REG_DWORD /d 0 /f >nul
+echo [OK] Da tat Windows Spotlight!
+pause
+goto privacy_menu
+
+:full_privacy
+cls
+echo.
+echo   ===============================================================
+echo    FULL PRIVACY MODE - Tat tat ca cac tinh nang thu thap du lieu
+echo   ===============================================================
+echo.
+set /p confirm_full=Ban co chac chan? (Y/N) ^> 
+if /i "%confirm_full%" neq "Y" goto privacy_menu
+
+echo.
+echo [!] Dang ap dung Full Privacy Mode...
+echo.
+
+echo [1/7] Tat Telemetry...
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\DataCollection" /v "AllowTelemetry" /t REG_DWORD /d 0 /f >nul
+sc config DiagTrack start= disabled >nul 2>&1
+sc stop DiagTrack >nul 2>&1
+
+echo [2/7] Tat Cortana...
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v "AllowCortana" /t REG_DWORD /d 0 /f >nul
+
+echo [3/7] Xoa Activity History...
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\System" /v "PublishUserActivities" /t REG_DWORD /d 0 /f >nul
+
+echo [4/7] Tat Location...
+reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\location" /v "Value" /t REG_SZ /d "Deny" /f >nul
+
+echo [5/7] Tat Advertising ID...
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\AdvertisingInfo" /v "Enabled" /t REG_DWORD /d 0 /f >nul
+
+echo [6/7] Tat Windows Spotlight...
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "RotatingLockScreenEnabled" /t REG_DWORD /d 0 /f >nul
+
+echo [7/7] Block Telemetry domains...
+echo 0.0.0.0 vortex.data.microsoft.com >> C:\Windows\System32\drivers\etc\hosts
+echo 0.0.0.0 telemetry.microsoft.com >> C:\Windows\System32\drivers\etc\hosts
+ipconfig /flushdns >nul
+
+echo.
+echo [OK] HOAN TAT! Da ap dung Full Privacy Mode.
+echo [!] Nen KHOI DONG LAI may de hieu luc hoan toan.
+pause
+goto privacy_menu
+
+:fix_menu
+cls
+echo [1] Reset Explorer  [2] SFC Scannow  [3] DISM Repair  [4] Chkdsk  [5] Back
+set /p f_choice=Lua chon ^> 
+if "%f_choice%"=="1" taskkill /f /im explorer.exe & start explorer.exe & goto fix_menu
+if "%f_choice%"=="2" sfc /scannow & pause & goto fix_menu
+if "%f_choice%"=="3" Dism /Online /Cleanup-Image /RestoreHealth & pause & goto fix_menu
+if "%f_choice%"=="4" chkdsk C: & pause & goto fix_menu
+if "%f_choice%"=="5" goto menu
+goto fix_menu
+
+:open_web
+cls
+echo.
+echo [!] Dang mo trang chu NuxOS trong trinh duyet...
+start https://nuxos.my.canva.site/nuxos
+timeout /t 2 >nul
+goto menu
+
+:about
+cls
+echo.
+echo   ========================= ABOUT NUXOS =========================
+echo.
+echo   [Project]: The NuxOS Community
+echo   [Vision]: Less is More Speed - Nux Foundation
+echo   [Author]: Nux Developer
+echo   [Website]: https://nuxos.my.canva.site/nuxos
+echo.
+echo   Day la ban Windows mod toi uu hoa cao nhat, duoc thiet ke de dat 
+echo   muc tieu nhe va nhanh nhung van duy tri hieu nang on dinh.
+echo.
+echo   Cam on ban da tin tuong su dung he sinh thai cua Nux Foundation!
+echo.
+pause
+goto menu
+
+:sys_info
+cls
+echo.
+echo   ========================= SYSTEM INFORMATION =========================
+echo.
+
+echo [Windows Version]:
+wmic os get Caption, OSArchitecture /Value | findstr "="
+
+echo [CPU]:
+wmic cpu get name | findstr /V "Name"
+
+echo [RAM]:
+wmic OS get TotalVisibleMemorySize /Value | findstr "="
+
+echo [Graphics Card - GPU]:
+wmic path win32_VideoController get name | findstr /V "Name"
+
+echo [Screen Resolution]:
+wmic path win32_VideoController get CurrentHorizontalResolution,CurrentVerticalResolution | findstr /R "[0-9]"
+
+echo [Disk Space]:
+wmic logicaldisk get deviceid, freespace, size | findstr ":"
+
+echo [System Uptime]:
+powershell -Command "$os = Get-WmiObject win32_operatingsystem; $uptime = (Get-Date) - $os.ConvertToDateTime($os.LastBootUpTime); Write-Host ($uptime.Days, 'ngay,', $uptime.Hours, 'gio,', $uptime.Minutes, 'phut' -join ' ')"
+
+echo.
+echo   ======================================================================
+pause
+goto menu
+
+:quick_settings
+cls
+echo.
+echo   ========================= QUICK SETTINGS =========================
+echo.
+echo    [1] Tat Hibernate (Giai phong o cung)
+echo    [2] Bat Hibernate
+echo    [3] Bat Dark Mode
+echo    [4] Bat Light Mode
+echo    [5] Quay lai Menu chinh
+echo.
+set "s_choice="
+set /p s_choice=Lua chon (1-5) ^> 
+if "%s_choice%"=="1" powercfg -h off & echo [OK] Hibernate Disabled. & pause & goto quick_settings
+if "%s_choice%"=="2" powercfg -h on & echo [OK] Hibernate Enabled. & pause & goto quick_settings
+if "%s_choice%"=="3" goto set_dark
+if "%s_choice%"=="4" goto set_light
+if "%s_choice%"=="5" goto menu
+goto quick_settings
+
+:set_dark
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" /v "AppsUseLightTheme" /t REG_DWORD /d 0 /f >nul
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" /v "SystemUsesLightTheme" /t REG_DWORD /d 0 /f >nul
+echo [OK] Dark Mode Enabled.
+pause
+goto quick_settings
+
+:set_light
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" /v "AppsUseLightTheme" /t REG_DWORD /d 1 /f >nul
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" /v "SystemUsesLightTheme" /t REG_DWORD /d 1 /f >nul
+echo [OK] Light Mode Enabled.
+pause
+goto quick_settings
+
+:network_menu
+cls
+echo.
+echo   ========================= NETWORK TOOLS =========================
+echo.
+echo    [1] Kiem tra IP va Ket noi (IPConfig)
+echo    [2] Lam moi DNS (Flush DNS)
+echo    [3] Ping kiem tra Internet (Google DNS)
+echo    [4] Reset Card mang (Netsh Winsock)
+echo    [5] Quay lai Menu chinh
+echo.
+set /p n_choice=Lua chon (1-5) ^> 
+if "%n_choice%"=="1" (ipconfig /all & pause & goto network_menu)
+if "%n_choice%"=="2" (ipconfig /flushdns & echo [OK] DNS cleared. & pause & goto network_menu)
+if "%n_choice%"=="3" (ping 8.8.8.8 & pause & goto network_menu)
+if "%n_choice%"=="4" (netsh winsock reset & echo [!] Hay khoi dong lai may. & pause & goto network_menu)
+if "%n_choice%"=="5" (goto menu)
+goto network_menu
+
+:optimize
+cls
+echo.
+echo [!] Dang don dep tep tam...
+del /s /f /q %temp%\*.* >nul 2>&1
+echo [OK] Hoan tat!
+pause
+goto menu
+
+:run
+cls
+echo [!] Dang ket noi kich hoat...
+powershell -NoProfile -ExecutionPolicy Bypass -Command "irm https://get.activated.win | iex"
+echo.
+pause
+goto menu
+
+:disable_update
+cls
+echo [!] Dang tam dung Update den nam 3000...
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings" /v "PauseUpdatesExpiryTime" /t REG_SZ /d "3000-12-31T00:00:00Z" /f >nul
+echo [OK] Da tam dung Windows Update.
+pause
+goto menu
+
+:browser_menu
+cls
+echo.
+echo   ========================= BROWSER INSTALLER =========================
+echo.
+echo    [1] Google Chrome
+echo    [2] Microsoft Edge
+echo    [3] Opera
+echo    [4] Brave Browser
+echo    [5] Quay lai Menu chinh
+echo.
+set "b_choice="
+set /p b_choice=Chon trinh duyet ^> 
+if "%b_choice%"=="1" set "app=Google.Chrome" & goto install
+if "%b_choice%"=="2" set "app=Microsoft.Edge" & goto install
+if "%b_choice%"=="3" set "app=Opera.Opera" & goto install
+if "%b_choice%"=="4" set "app=Brave.Brave" & goto install
+if "%b_choice%"=="5" goto menu
+goto browser_menu
+
+:install
+cls
+echo [!] Dang cai dat %app%...
+winget install --id %app% --silent --accept-package-agreements --accept-source-agreements
+pause
+goto browser_menu
+
+:check
+cls
+slmgr /xpr
+pause
+goto menu
