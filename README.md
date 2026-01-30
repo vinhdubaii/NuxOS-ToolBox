@@ -16,7 +16,7 @@
 * Tối ưu hóa bộ nhớ RAM và CPU Scheduling.
 * Tắt các hiệu ứng hình ảnh dư thừa để giải phóng tài nguyên.
 
-### 3. 🛡️ Bảo mật & Rieng tư (Privacy & Security)
+### 3. 🛡️ Bảo mật & Riêng tư (Privacy & Security)
 * Chặn hoàn toàn Windows Telemetry (thu thập dữ liệu).
 * Tắt Cortana, Location Tracking và Advertising ID.
 * Chỉnh sửa file Hosts để chặn các tên miền theo dõi của Microsoft.
