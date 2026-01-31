@@ -1,47 +1,45 @@
-# 🚀 NuxOS ToolBox
+# 🚀 NUX TOOLBOX - THE NUXOS COMMUNITY PROJECT
 
-**NuxOS ToolBox** là một bộ công cụ tối ưu hóa và quản trị hệ thống mạnh mẽ, được thiết kế đặc biệt để tích hợp vào các bản Windows Mod. Được phát triển bởi **Do Tat Vinh**, công cụ này tập trung vào hiệu suất, sự tinh gọn và quyền riêng tư tuyệt đối.
+<p align="center">
+  <img src="https://img.shields.io/badge/Version-1.0.1-blue?style=for-the-badge">
+  <img src="https://img.shields.io/badge/Platform-Windows-0078D4?style=for-the-badge&logo=windows">
+  <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge">
+</p>
+
+**Nux Toolbox** là bộ công cụ quản trị hệ thống mạnh mẽ được thiết kế đặc biệt cho bản mod **NuxOS Enterprise**. Công cụ này giúp bạn tối ưu hóa hệ điều hành mà không làm giảm hiệu suất.
 
 ---
 
-## ✨ Tính năng nổi bật
+## 🌟 Tính năng nổi bật
 
-### 1. 🔑 Kích hoạt hệ thống (Activation)
-* Hỗ trợ kích hoạt Windows và Office bản quyền thông qua script Online an toàn.
-* Kiểm tra trạng thái bản quyền nhanh chóng.
+### 🛠️ Bảo trì & Sửa lỗi (System Fix)
+* **Quyền Quản trị viên tự động:** Tự động yêu cầu quyền Admin để tránh lỗi **Error: 740** khi thực hiện lệnh hệ thống.
+* **Vá lỗi hệ thống:** Tích hợp các công cụ chuyên sâu như `SFC Scannow` và `DISM Repair` để sửa chữa file nhân.
+* **Cứu hộ Explorer:** Khởi động lại Windows Explorer chỉ với một phím bấm khi gặp lỗi đơ màn hình.
 
-### 2. ⚡ Tối ưu hiệu năng (Performance Booster)
+### ⚡ Tối ưu hóa dung lượng
+* **Dọn dẹp siêu tốc:** Loại bỏ tệp tạm và rác hệ thống giúp ổ cứng luôn nhẹ nhàng.
+* **Hoãn cập nhật vĩnh viễn:** Chặn Windows Update đến năm 3000, ngăn chặn việc tự động tải tệp rác.
+* **Quản lý Hibernate:** Bật/Tắt chế độ ngủ đông để lấy lại dung lượng lưu trữ ngay lập tức.
+
+### ⚡ Tối ưu hiệu năng (Performance Booster)
 * Chỉnh sửa Registry để tối ưu hóa Gaming.
 * Quản lý Power Plan (High Performance, Ultimate Performance).
 * Tối ưu hóa bộ nhớ RAM và CPU Scheduling.
 * Tắt các hiệu ứng hình ảnh dư thừa để giải phóng tài nguyên.
 
-### 3. 🛡️ Bảo mật & Riêng tư (Privacy & Security)
-* Chặn hoàn toàn Windows Telemetry (thu thập dữ liệu).
-* Tắt Cortana, Location Tracking và Advertising ID.
-* Chỉnh sửa file Hosts để chặn các tên miền theo dõi của Microsoft.
-
-### 4. 🛠️ Công cụ hệ thống (System Tools)
-* **System Info:** Hiển thị thông tin CPU, RAM, GPU, Độ phân giải và Uptime theo phong cách Neofetch.
-* **Network Tools:** Reset card mạng, Flush DNS, Ping test.
-* **Quick Settings:** Bật/Tắt Dark Mode, Hibernate, Windows Update (đến năm 3000).
+### 🌐 Tiện ích & Kết nối
+* **Cài đặt Browser:** Tích hợp sẵn Winget để cài Chrome, Edge, Brave, Opera một cách tự động.
+* **Công cụ mạng:** Kiểm tra IP, Flush DNS và Ping Google để xử lý sự cố internet nhanh chóng.
+* **Kích hoạt:** Hỗ trợ Online Activation cho các phiên bản Windows.
 
 ---
 
-## 🖥️ Giao diện người dùng
+## 🚀 Hướng dẫn sử dụng
 
-Công cụ sử dụng giao diện dòng lệnh (Command Line Interface) với màu sắc Cyan đặc trưng và nghệ thuật ASCII chuyên nghiệp.
-
-> **Lưu ý:** Luôn chạy công cụ với quyền **Administrator** để đảm bảo các thay đổi hệ thống có hiệu lực.
-
----
-
-## 🛠️ Hướng dẫn cài đặt & Đóng gói
-
-Để tích hợp vào bản Windows Mod của bạn:
-1. Tải về file `NuxOS_ToolBox.exe` (đã được đóng gói).
-2. Đặt vào thư mục hệ thống hoặc Desktop của bản Mod.
-3. Có thể cấu trúc chạy tự động thông qua `SetupComplete.cmd` hoặc `RunOnce`.
+1. **Tải về:** Download file `Nux.Administartor_ToolBox.bat` từ Repository này.
+2. **Khởi chạy:** Nhấp đúp vào file (Script sẽ tự động yêu cầu quyền Administrator).
+3. **Lựa chọn:** Nhập số tương ứng với chức năng bạn cần trên Menu chính.
 
 ---
 
@@ -53,9 +51,24 @@ Vì đây là dự án mã nguồn mở trên GitHub, mọi đóng góp về cod
 
 ---
 
-## 📄 Giấy phép (License)
-
-Dự án này được phát hành dưới giấy phép **MIT License**. Bạn có quyền sử dụng và sửa đổi, nhưng vui lòng giữ thông tin tác giả gốc.
+### 🛡 Tính an toàn:
+- Mã nguồn dựa trên tệp `.bat` công khai trên repository này.
+- Không chứa virus, không thu thập dữ liệu người dùng (đúng với tinh thần của NuxOS).
+- Đã được tối ưu để không gây "false positive" với Windows Defender.
 
 ---
-*Developed with ❤️ by Do Tat Vinh*
+
+## 💓 About NuxOS
+
+Dự án này được xây dựng bởi **Nux Developer** với tất cả tâm huyết dành cho cộng đồng yêu thích NuxOS.
+
+* **🌐 Website:** [https://nuxos.my.canva.site/nuxos](https://nuxos.my.canva.site/nuxos)
+* **🎯 Mục tiêu:** Hiệu năng tối đa trên dung lượng tối thiểu.
+
+---
+
+## 📄 License
+Phát hành dưới giấy phép MIT. Bản quyền thuộc về **Nux Foundation**.
+
+---
+*© 2026 NuxOS | The NuxOS Community Project*
