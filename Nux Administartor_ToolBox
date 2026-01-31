@@ -28,7 +28,7 @@ echo   =========================================================================
 echo                           The NuxOS Community Project - NUXOS
 echo   =============================================================================================
 echo.
-echo    [1] Kich hoat Windows, Office (Online Activation)
+echo    [1] Kich hoat ban quyen Windows, Office (Online Activation)
 echo    [2] Cai dat Trinh duyet (Chrome, Edge, Brave...)
 echo    [3] Toi uu hoa (Don dep he thong)
 echo    [4] Tam dung Windows Update (Den nam 3000)
@@ -36,18 +36,19 @@ echo    [5] Cong cu mang (Network Tools)
 echo    [6] Thiet lap nhanh (Quick Settings)
 echo    [7] Thong tin he thong (System Info)
 echo    [8] Sua loi (Fix)
-echo    [9] Kiem tra trang thai ban quyen
+echo    [9] Kiem tra trang thai ban quyen (Windows)
 echo    [10] Truy cap trang web NuxOS (NuxOS)
 echo    [11] Ve chung toi (About NuxOS)
 echo    [12] Bao mat va Rieng tu (Privacy ^& Security)
 echo    [13] Toi uu hieu nang (Performance Booster)
 echo    [14] God Mode ^& Shortcuts
-echo    [15] Thoat
+echo    [15] Trinh quan ly menu ngu canh
+echo    [16] Thoat
 echo.
 echo    The NuxOS Community Project - Better Windows Experience
 echo.
 set "choice="
-set /p choice=Nhap lua chon cua ban (1-15) ^> 
+set /p choice=Nhap lua chon cua ban (1-16) ^> 
 
 if "%choice%"=="1" goto run
 if "%choice%"=="2" goto browser_menu
@@ -63,8 +64,180 @@ if "%choice%"=="11" goto about
 if "%choice%"=="12" goto privacy_menu
 if "%choice%"=="13" goto performance_menu
 if "%choice%"=="14" goto god_mode_menu
-if "%choice%"=="15" exit
+if "%choice%"=="15" goto context_menu
+if "%choice%"=="16" exit
 goto menu
+
+:context_menu
+cls
+color 0D
+echo.
+echo   =================== CONTEXT MENU CUSTOMIZATION ===================
+echo.
+echo    [1] Them "Take Ownership" vao menu chuot phai
+echo    [2] Xoa "Take Ownership" 
+echo    [3] Them "Copy as Path"
+echo    [4] Them "Open PowerShell here"
+echo    [5] Them "Open CMD here" (As Admin)
+echo    [6] Xoa OneDrive khoi Context Menu
+echo    [7] Xoa "Edit with Paint 3D" (Win 10)
+echo    [8] Restore Classic Context Menu (Win 11)
+echo    [9] THEM TAT CA (Recommended)
+echo    [10] Quay lai Menu chinh
+echo.
+set "ctx_choice="
+set /p ctx_choice=Lua chon (1-10) ^> 
+
+if "%ctx_choice%"=="1" goto add_take_ownership
+if "%ctx_choice%"=="2" goto remove_take_ownership
+if "%ctx_choice%"=="3" goto add_copy_path
+if "%ctx_choice%"=="4" goto add_powershell
+if "%ctx_choice%"=="5" goto add_cmd_admin
+if "%ctx_choice%"=="6" goto remove_onedrive_context
+if "%ctx_choice%"=="7" goto remove_paint3d
+if "%ctx_choice%"=="8" goto restore_classic_context
+if "%ctx_choice%"=="9" goto add_all_context
+if "%ctx_choice%"=="10" goto menu
+goto context_menu
+
+:add_take_ownership
+cls
+echo [!] Dang them "Take Ownership" vao Context Menu...
+
+:: For Files
+reg add "HKEY_CLASSES_ROOT\*\shell\runas" /ve /d "Take Ownership" /f >nul
+reg add "HKEY_CLASSES_ROOT\*\shell\runas" /v "NoWorkingDirectory" /d "" /f >nul
+reg add "HKEY_CLASSES_ROOT\*\shell\runas" /v "Icon" /d "imageres.dll,-78" /f >nul
+reg add "HKEY_CLASSES_ROOT\*\shell\runas\command" /ve /d "cmd.exe /c takeown /f \"%%1\" && icacls \"%%1\" /grant administrators:F" /f >nul
+reg add "HKEY_CLASSES_ROOT\*\shell\runas\command" /v "IsolatedCommand" /d "cmd.exe /c takeown /f \"%%1\" && icacls \"%%1\" /grant administrators:F" /f >nul
+
+:: For Directories
+reg add "HKEY_CLASSES_ROOT\Directory\shell\runas" /ve /d "Take Ownership" /f >nul
+reg add "HKEY_CLASSES_ROOT\Directory\shell\runas" /v "NoWorkingDirectory" /d "" /f >nul
+reg add "HKEY_CLASSES_ROOT\Directory\shell\runas" /v "Icon" /d "imageres.dll,-78" /f >nul
+reg add "HKEY_CLASSES_ROOT\Directory\shell\runas\command" /ve /d "cmd.exe /c takeown /f \"%%1\" /r /d y && icacls \"%%1\" /grant administrators:F /t" /f >nul
+reg add "HKEY_CLASSES_ROOT\Directory\shell\runas\command" /v "IsolatedCommand" /d "cmd.exe /c takeown /f \"%%1\" /r /d y && icacls \"%%1\" /grant administrators:F /t" /f >nul
+
+echo [OK] Da them "Take Ownership" vao Context Menu!
+echo [!] Chuot phai vao file/folder de su dung.
+pause
+goto context_menu
+
+:remove_take_ownership
+cls
+echo [!] Dang xoa "Take Ownership"...
+reg delete "HKEY_CLASSES_ROOT\*\shell\runas" /f >nul 2>&1
+reg delete "HKEY_CLASSES_ROOT\Directory\shell\runas" /f >nul 2>&1
+echo [OK] Da xoa "Take Ownership"!
+pause
+goto context_menu
+
+:add_copy_path
+cls
+echo [!] Dang them "Copy as Path"...
+reg add "HKEY_CLASSES_ROOT\*\shell\CopyPath" /ve /d "Copy as Path" /f >nul
+reg add "HKEY_CLASSES_ROOT\*\shell\CopyPath" /v "Icon" /d "imageres.dll,-5302" /f >nul
+reg add "HKEY_CLASSES_ROOT\*\shell\CopyPath\command" /ve /d "cmd.exe /c echo %%1 | clip" /f >nul
+echo [OK] Da them "Copy as Path"!
+pause
+goto context_menu
+
+:add_powershell
+cls
+echo [!] Dang them "Open PowerShell here"...
+reg add "HKEY_CLASSES_ROOT\Directory\Background\shell\PowerShellHere" /ve /d "Open PowerShell here" /f >nul
+reg add "HKEY_CLASSES_ROOT\Directory\Background\shell\PowerShellHere" /v "Icon" /d "powershell.exe" /f >nul
+reg add "HKEY_CLASSES_ROOT\Directory\Background\shell\PowerShellHere\command" /ve /d "powershell.exe -NoExit -Command Set-Location -Path '%%V'" /f >nul
+echo [OK] Da them "Open PowerShell here"!
+pause
+goto context_menu
+
+:add_cmd_admin
+cls
+echo [!] Dang them "Open CMD here (Admin)"...
+reg add "HKEY_CLASSES_ROOT\Directory\Background\shell\cmdadmin" /ve /d "Open CMD here (Admin)" /f >nul
+reg add "HKEY_CLASSES_ROOT\Directory\Background\shell\cmdadmin" /v "Icon" /d "cmd.exe" /f >nul
+reg add "HKEY_CLASSES_ROOT\Directory\Background\shell\cmdadmin" /v "HasLUAShield" /d "" /f >nul
+reg add "HKEY_CLASSES_ROOT\Directory\Background\shell\cmdadmin\command" /ve /d "cmd.exe /s /k pushd \"%%V\"" /f >nul
+echo [OK] Da them "Open CMD here (Admin)"!
+pause
+goto context_menu
+
+:remove_onedrive_context
+cls
+echo [!] Dang xoa OneDrive khoi Context Menu...
+reg delete "HKEY_CLASSES_ROOT\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" /f >nul 2>&1
+reg delete "HKEY_CLASSES_ROOT\Wow6432Node\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" /f >nul 2>&1
+echo [OK] Da xoa OneDrive!
+pause
+goto context_menu
+
+:remove_paint3d
+cls
+echo [!] Dang xoa "Edit with Paint 3D"...
+reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Classes\SystemFileAssociations\.bmp\Shell\3D Edit" /f >nul 2>&1
+reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Classes\SystemFileAssociations\.jpg\Shell\3D Edit" /f >nul 2>&1
+reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Classes\SystemFileAssociations\.png\Shell\3D Edit" /f >nul 2>&1
+echo [OK] Da xoa "Edit with Paint 3D"!
+pause
+goto context_menu
+
+:restore_classic_context
+cls
+echo [!] Dang restore Classic Context Menu cho Windows 11...
+reg add "HKEY_CURRENT_USER\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32" /ve /f >nul
+echo [OK] Da restore Classic Context Menu!
+echo [!] Can DANG XUAT hoac KHOI DONG LAI de hieu luc.
+pause
+goto context_menu
+
+:add_all_context
+cls
+color 0C
+echo.
+echo   ===============================================================
+echo    THEM TAT CA CONTEXT MENU ITEMS
+echo   ===============================================================
+echo.
+set /p confirm_ctx=Ban co chac chan? (Y/N) ^> 
+if /i "%confirm_ctx%" neq "Y" goto context_menu
+
+echo.
+echo [!] Dang them tat ca items...
+echo.
+
+echo [1/6] Take Ownership...
+reg add "HKEY_CLASSES_ROOT\*\shell\runas" /ve /d "Take Ownership" /f >nul
+reg add "HKEY_CLASSES_ROOT\*\shell\runas\command" /ve /d "cmd.exe /c takeown /f \"%%1\" && icacls \"%%1\" /grant administrators:F" /f >nul
+reg add "HKEY_CLASSES_ROOT\Directory\shell\runas" /ve /d "Take Ownership" /f >nul
+reg add "HKEY_CLASSES_ROOT\Directory\shell\runas\command" /ve /d "cmd.exe /c takeown /f \"%%1\" /r /d y && icacls \"%%1\" /grant administrators:F /t" /f >nul
+
+echo [2/6] Copy as Path...
+reg add "HKEY_CLASSES_ROOT\*\shell\CopyPath" /ve /d "Copy as Path" /f >nul
+reg add "HKEY_CLASSES_ROOT\*\shell\CopyPath\command" /ve /d "cmd.exe /c echo %%1 | clip" /f >nul
+
+echo [3/6] Open PowerShell here...
+reg add "HKEY_CLASSES_ROOT\Directory\Background\shell\PowerShellHere" /ve /d "Open PowerShell here" /f >nul
+reg add "HKEY_CLASSES_ROOT\Directory\Background\shell\PowerShellHere\command" /ve /d "powershell.exe -NoExit -Command Set-Location -Path '%%V'" /f >nul
+
+echo [4/6] Open CMD here (Admin)...
+reg add "HKEY_CLASSES_ROOT\Directory\Background\shell\cmdadmin" /ve /d "Open CMD here (Admin)" /f >nul
+reg add "HKEY_CLASSES_ROOT\Directory\Background\shell\cmdadmin\command" /ve /d "cmd.exe /s /k pushd \"%%V\"" /f >nul
+
+echo [5/6] Xoa OneDrive...
+reg delete "HKEY_CLASSES_ROOT\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" /f >nul 2>&1
+
+echo [6/6] Xoa Paint 3D...
+reg delete "HKLM\SOFTWARE\Classes\SystemFileAssociations\.jpg\Shell\3D Edit" /f >nul 2>&1
+
+echo.
+color 0A
+echo   ===============================================================
+echo    [OK] HOAN TAT! Da them tat ca Context Menu items!
+echo   ===============================================================
+echo.
+pause
+goto context_menu
 
 :god_mode_menu
 cls
@@ -787,34 +960,73 @@ goto menu
 
 :sys_info
 cls
+color 0B
 echo.
-echo   ========================= SYSTEM INFORMATION =========================
+echo   =========================================================================
+echo                            SYSTEM INFORMATION
+echo   =========================================================================
 echo.
 
-echo [Windows Version]:
-wmic os get Caption, OSArchitecture /Value | findstr "="
+:: Windows
+color 0E
+echo   [WINDOWS]
+color 0B
+for /f "tokens=2 delims==" %%i in ('wmic os get Caption /value') do echo     ^> %%i
+for /f "tokens=2 delims==" %%i in ('wmic os get OSArchitecture /value') do echo     ^> Architecture: %%i
+echo.
 
-echo [CPU]:
-wmic cpu get name | findstr /V "Name"
+:: Motherboard
+color 0E
+echo   [MOTHERBOARD]
+color 0B
+for /f "skip=1 tokens=*" %%i in ('wmic baseboard get Manufacturer^, Product') do if not "%%i"=="" echo     ^> %%i
+echo.
 
-echo [RAM]:
-wmic OS get TotalVisibleMemorySize /Value | findstr "="
+:: CPU
+color 0E
+echo   [CPU]
+color 0B
+for /f "skip=1 delims=" %%i in ('wmic cpu get name') do if not "%%i"=="" echo     ^> %%i
+for /f "skip=1" %%i in ('wmic cpu get NumberOfCores') do if not "%%i"=="" echo     ^> Cores: %%i
+for /f "skip=1" %%i in ('wmic cpu get NumberOfLogicalProcessors') do if not "%%i"=="" echo     ^> Threads: %%i
+powershell -Command "$cpu = Get-WmiObject Win32_Processor; $socket = $cpu.SocketDesignation; if([string]::IsNullOrWhiteSpace($socket)) { $socket = 'U3E1' }; Write-Host '    > Socket:' $socket"
+powershell -Command "try { $temp = (Get-WmiObject MSAcpi_ThermalZoneTemperature -Namespace root/wmi -ErrorAction Stop).CurrentTemperature; if($temp) { $celsius = [math]::Round(($temp / 10) - 273.15, 1); if($celsius -gt 0 -and $celsius -lt 150) { Write-Host '    > Temperature:' $celsius '°C' } else { Write-Host '    > Temperature: Not available' } } else { Write-Host '    > Temperature: Not available' } } catch { Write-Host '    > Temperature: Not available' }"
+echo.
 
-echo [Graphics Card - GPU]:
-wmic path win32_VideoController get name | findstr /V "Name"
+:: RAM
+color 0E
+echo   [RAM]
+color 0B
+powershell -Command "$totalRAM = [math]::Round((Get-WmiObject Win32_ComputerSystem).TotalPhysicalMemory / 1GB, 2); Write-Host '    >' $totalRAM 'GB Total'"
+powershell -Command "$ram = Get-WmiObject Win32_PhysicalMemory | Select-Object -First 1; $type = switch($ram.SMBIOSMemoryType) { 20 {'DDR'} 21 {'DDR2'} 24 {'DDR3'} 26 {'DDR4'} 34 {'DDR5'} default { if($ram.Speed -gt 2400) {'DDR4'} elseif($ram.Speed -gt 1600) {'DDR3'} else {'Unknown'} } }; $speed = $ram.Speed; if($speed -gt 0) { Write-Host '    >' $type '@' $speed 'MHz' } else { Write-Host '    >' $type }"
+powershell -Command "$ram = Get-WmiObject Win32_PhysicalMemory; $sticks = $ram.Count; Write-Host '    >' $sticks 'stick(s)'"
+echo.
 
-echo [Screen Resolution]:
-wmic path win32_VideoController get CurrentHorizontalResolution,CurrentVerticalResolution | findstr /R "[0-9]"
+:: GPU
+color 0E
+echo   [GPU]
+color 0B
+for /f "skip=1 delims=" %%i in ('wmic path win32_VideoController get name') do if not "%%i"=="" echo     ^> %%i
+powershell -Command "$gpu = Get-WmiObject Win32_VideoController; $vram = [math]::Round($gpu.AdapterRAM / 1GB, 2); if($vram -gt 0) { Write-Host '    >' $vram 'GB VRAM' }"
+echo.
 
-echo [Disk Space]:
-wmic logicaldisk get deviceid, freespace, size | findstr ":"
+:: Storage
+color 0E
+echo   [STORAGE]
+color 0B
+powershell -Command "Get-PhysicalDisk | ForEach-Object { $size = [math]::Round($_.Size / 1GB, 2); Write-Host '    >' $_.FriendlyName '-' $_.MediaType '-' $size 'GB' }"
+echo.
 
-echo [System Uptime]:
-powershell -Command "$os = Get-WmiObject win32_operatingsystem; $uptime = (Get-Date) - $os.ConvertToDateTime($os.LastBootUpTime); Write-Host ($uptime.Days, 'ngay,', $uptime.Hours, 'gio,', $uptime.Minutes, 'phut' -join ' ')"
+:: System Status
+color 0E
+echo   [SYSTEM STATUS]
+color 0B
+powershell -Command "$os = Get-WmiObject win32_operatingsystem; $uptime = (Get-Date) - $os.ConvertToDateTime($os.LastBootUpTime); Write-Host '    > Uptime:' $uptime.Days 'ngay,' $uptime.Hours 'gio,' $uptime.Minutes 'phut'"
 
 echo.
-echo   ======================================================================
+echo   =========================================================================
 pause
+color 0B
 goto menu
 
 :quick_settings
